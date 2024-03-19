@@ -34,7 +34,7 @@ public class List<Item> implements Iterable<Item> {
     }
 
     /**
-     * Añade el elemento al final
+     * Añade el elemento al final.
      *
      * @param element
      */
@@ -47,6 +47,13 @@ public class List<Item> implements Iterable<Item> {
         count++;
     }
 
+    /**
+     *Añade un item en la posicion indicada.
+     * 
+     * @param element
+     * @param index
+     * @return
+     */
     public boolean add(Item element, int index) {
         if (index < count) {
             return false;
@@ -56,18 +63,16 @@ public class List<Item> implements Iterable<Item> {
 
             current = first;
             countAdd = 0;
-            
+
             while (countAdd < index) {
                 current = current.next;
                 countAdd++;
             }
+            
+            current.prev.next = newElement;
+            current.next.prev = newElement;
             newElement.next = current.next;
             newElement.prev = current.prev;
-
-            if (current.next != null) {
-                current.next.prev = newElement;
-            }
-            current.next = newElement;
 
             count++;
             return true;
