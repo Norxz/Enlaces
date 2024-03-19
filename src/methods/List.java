@@ -11,8 +11,8 @@ import java.util.Iterator;
  */
 public class List<Item> implements Iterable<Item> {
 
-    Node first, last;
-    int count;
+    private Node first, last, current;
+    private int count, countAdd;
 
     /**
      * Crea el nodo con el item y las referencias
@@ -34,9 +34,9 @@ public class List<Item> implements Iterable<Item> {
     }
 
     /**
+     * Añade el elemento al final
      *
-     * @param node
-     * @return
+     * @param element
      */
     public void add(Item element) {
         Node newElement = new Node();
@@ -44,6 +44,34 @@ public class List<Item> implements Iterable<Item> {
         newElement.prev = last;
         last = newElement;
         newElement.next = first;
+        count++;
+    }
+
+    public boolean add(Item element, int index) {
+        if (index < count) {
+            return false;
+        } else {
+            Node newElement = new Node();
+            newElement.item = element;
+
+            current = first;
+            countAdd = 0;
+            
+            while (countAdd < index) {
+                current = current.next;
+                countAdd++;
+            }
+            newElement.next = current.next;
+            newElement.prev = current.prev;
+
+            if (current.next != null) {
+                current.next.prev = newElement;
+            }
+            current.next = newElement;
+
+            count++;
+            return true;
+        }
     }
 
     /**
