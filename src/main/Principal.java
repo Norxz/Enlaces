@@ -1,6 +1,6 @@
 package main;
 
-import methods.StackLLI;
+import methods.List;
 
 import java.util.Scanner;
 
@@ -10,6 +10,14 @@ import java.util.Scanner;
  */
 public class Principal {
 
+    List<String> list;
+    /**
+     * Constructor del método lista
+     */
+    public Principal(){
+        list = new List<>();
+    }
+    
     /**
      * Genera los nombres que serán agregados a la lista
      *
@@ -66,6 +74,7 @@ public class Principal {
                 case 7:
                     break;
                 case 8:
+                    
                     break;
                 case 9:
                     break;

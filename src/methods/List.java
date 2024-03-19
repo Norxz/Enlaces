@@ -9,7 +9,7 @@ import java.util.Iterator;
  *
  * @author Norxz
  */
-public class StackLLI<Item> implements Iterable<Item> {
+public class List<Item> implements Iterable<Item> {
 
     Node first;
     Node last;
@@ -25,7 +25,7 @@ public class StackLLI<Item> implements Iterable<Item> {
     /**
      * Constructor que inicializa una pila vacía.
      */
-    public StackLLI() {
+    public List() {
         first = null;
         last = null;
         count = 0;
