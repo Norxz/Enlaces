@@ -3,18 +3,20 @@ package methods;
 import java.util.Iterator;
 
 /**
- * Esta clase implementa la pila mediante nodos.
+ * Esta clase implementa la lista mediante nodos.
  *
- * @param <Item> Tipo de los elementos almacenados en la pila.
+ * @param <Item> Tipo de los elementos almacenados en la lista.
  *
  * @author Norxz
  */
 public class List<Item> implements Iterable<Item> {
 
-    Node first;
-    Node last;
+    Node first, last;
     int count;
 
+    /**
+     * Crea el nodo con el item y las referencias
+     */
     private class Node {
 
         Item item;
@@ -23,7 +25,7 @@ public class List<Item> implements Iterable<Item> {
     }
 
     /**
-     * Constructor que inicializa una pila vacía.
+     * Constructor que inicializa una lista vacía.
      */
     public List() {
         first = null;
@@ -32,25 +34,25 @@ public class List<Item> implements Iterable<Item> {
     }
 
     /**
+     *
+     * @param node
+     * @return
+     */
+    public void add(Item element) {
+        Node newElement = new Node();
+        newElement.item = element;
+        newElement.prev = last;
+        last = newElement;
+        newElement.next = first;
+    }
+
+    /**
      * Agrega un elemento a la pila.
      *
      * @param item El elemento a agregar.
      */
     public void push(Item item) {
-        Node oldfirst = first;
-        first = new Node();
-        first.item = item;
-        first.next = oldfirst;
-        if (oldfirst != null) {
-            oldfirst.prev = first;
-        }
-        if (last == null) {
-            last= first;
-        }else{
-            first.prev = last;
-            last.next = first;
-        }
-        count++;
+
     }
 
     /**
@@ -65,7 +67,7 @@ public class List<Item> implements Iterable<Item> {
         if (first != null) {
             first.prev = last;
             last.next = first;
-        }else{
+        } else {
             last = null;
         }
         count--;
@@ -115,7 +117,7 @@ public class List<Item> implements Iterable<Item> {
 
         @Override
         public boolean hasNext() {
-            return current  != null;
+            return current != null;
         }
 
         @Override
