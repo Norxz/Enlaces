@@ -25,8 +25,8 @@ public class Principal {
      * @return
      */
     private String generarNombre() {
-        String[] nombres = {"Mohhamed", "Andres", "Carolina", "Sebastián", "Felipe", "Camilo", "Miguel", "Ana", "Alberto", "Paola"};
-        String[] apellidos = {"Mclovin","Parra", "Mejia", "Viana", "Ramírez", "Riveros", "Sanabria", "Alvarez", "Pardo"};
+        String[] nombres = {"Mohhamed", "Jorge","Ako","Santiago","Manuel","Aspi", "Andres", "Carolina", "Sebastián", "Felipe", "Camilo", "Miguel", "Ana", "Alberto", "Paola"};
+        String[] apellidos = {"Mclovin", "Borda","Cusguen", "Parra", "Mejia", "Viana","Ortiga", "Ramírez", "Riveros", "Sanabria", "Alvarez", "Pardo"};
         return nombres[(int) (Math.random() * nombres.length)] + " " + apellidos[(int) (Math.random() * apellidos.length)];
     }
 
