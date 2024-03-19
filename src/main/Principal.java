@@ -4,36 +4,20 @@ import methods.List;
 
 import java.util.Scanner;
 
-/**
- *
- * @author espin
- */
 public class Principal {
 
     List<String> list;
 
-    /**
-     * Constructor del método lista
-     */
     public Principal() {
         list = new List<>();
     }
 
-    /**
-     * Genera los nombres que serán agregados a la lista
-     *
-     * @return
-     */
     private String generarNombre() {
         String[] nombres = {"Mohhamed", "Jorge", "Ako", "Santiago", "Manuel", "Aspi", "Andres", "Carolina", "Sebastián", "Felipe", "Camilo", "Miguel", "Ana", "Alberto", "Paola"};
         String[] apellidos = {"Mclovin", "Borda", "Cusguen", "Parra", "Mejia", "Viana", "Ortiga", "Ramírez", "Riveros", "Sanabria", "Alvarez", "Pardo"};
         return nombres[(int) (Math.random() * nombres.length)] + " " + apellidos[(int) (Math.random() * apellidos.length)];
     }
 
-    /**
-     *
-     * @param args
-     */
     public static void main(String[] args) {
         int option, index;
         Principal ppal;
@@ -93,6 +77,14 @@ public class Principal {
                 case 9:
                     break;
                 case 10:
+                    System.out.println("Ingrese la posición del elemento que desea eliminar.");
+                    index = in.nextInt();
+                    try {
+                        String removedElement = ppal.list.remove(index);
+                        System.out.println("El elemento " + removedElement + " ha sido eliminado.");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Error: Índice fuera de los límites de la lista.");
+                    }
                     break;
                 case 11:
                     break;
@@ -104,9 +96,7 @@ public class Principal {
                     break;
                 case 15:
                     System.out.println("Los elementos son: ");
-                    for (String s : ppal.list) {
-                        System.out.println(s);
-                    }
+                    System.out.println(ppal.list.toString());
                     break;
                 default:
                     System.out.println("Error. Por favor ingresa una opción válida.");

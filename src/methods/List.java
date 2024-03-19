@@ -1,22 +1,12 @@
 package methods;
 
-import java.util.Iterator;
+import java.util.*;
 
-/**
- * Esta clase implementa la lista mediante nodos.
- *
- * @param <Item> Tipo de los elementos almacenados en la lista.
- *
- * @author Norxz
- */
 public class List<Item> implements Iterable<Item> {
 
     private Node first, last, current;
     private int count, countAdd;
 
-    /**
-     * Crea el nodo con el item y las referencias
-     */
     private class Node {
 
         Item item;
@@ -24,9 +14,6 @@ public class List<Item> implements Iterable<Item> {
         Node prev;
     }
 
-    /**
-     * Constructor que inicializa una lista vacía.
-     */
     public List() {
         first = null;
         last = null;
@@ -34,11 +21,6 @@ public class List<Item> implements Iterable<Item> {
         count = 0;
     }
 
-    /**
-     * Añade el elemento al final.
-     *
-     * @param element
-     */
     public void add(Item element) {
         Node newElement = new Node();
         newElement.item = element;
@@ -54,13 +36,6 @@ public class List<Item> implements Iterable<Item> {
         count++;
     }
 
-    /**
-     * Añade un item en la posicion indicada.
-     *
-     * @param element
-     * @param index
-     * @return
-     */
     public boolean add(Item element, int index) {
         if (index > count) {
             return false;
@@ -75,24 +50,23 @@ public class List<Item> implements Iterable<Item> {
                 current = current.next;
                 countAdd++;
             }
-            if (true) {
 
-            }
-            current.prev.next = newElement;
-            current.next.prev = newElement;
-            newElement.next = current.next;
+            newElement.next = current;
             newElement.prev = current.prev;
+            current.prev.next = newElement;
+            current.prev = newElement;
 
+            if (index == 0) {
+                first = newElement;
+            }
+            if (index == count) {
+                last = newElement;
+            }
             count++;
             return true;
         }
     }
 
-    /**
-     * Agrega un elemento a la pila.
-     *
-     * @param item El elemento a agregar.
-     */
     public void push(Item item) {
         Node oldfirst = first;
         first = new Node();
@@ -110,12 +84,7 @@ public class List<Item> implements Iterable<Item> {
         count++;
     }
 
-    /**
-     * Elimina y retorna el elemento superior de la pila.
-     *
-     * @return El elemento superior de la pila.
-     */
-    public Item pop() {
+    public Item removeFirst() {
         Item item = first.item;
         first.item = null;
         first = first.next;
@@ -129,38 +98,75 @@ public class List<Item> implements Iterable<Item> {
         return item;
     }
 
-    /**
-     * Retorna el elemento superior de la pila sin eliminarlo.
-     *
-     * @return El elemento superior de la pila.
-     */
+    public Item removeLast() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("List is empty");
+        }
+        Item item = last.item;
+        if (first == last) {
+            first = null;
+            last = null;
+        } else {
+            last = last.prev;
+            last.next = first;
+            first.prev = last;
+        }
+        count--;
+        return item;
+    }
+
+    public Item remove(int index) {
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+        Node current = first;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        Item item = current.item;
+        if (current == first) {
+            removeFirst();
+        } else if (current == last) {
+            removeLast();
+        } else {
+            current.prev.next = current.next;
+            current.next.prev = current.prev;
+            count--;
+        }
+        return item;
+    }
+
     public Item peek() {
         return first.item;
     }
 
-    /**
-     * Verifica si la pila está vacía.
-     *
-     * @return true si la pila está vacía, false de lo contrario.
-     */
     public boolean isEmpty() {
         return first == null;
     }
 
-    /**
-     * Retorna el número de elementos en la pila.
-     *
-     * @return El número de elementos en la pila.
-     */
     public int size() {
         return count;
     }
 
-    /**
-     * Retorna un iterador sobre los elementos de la pila.
-     *
-     * @return Un iterador sobre los elementos de la pila.
-     */
+    @Override
+    public String toString() {
+        if (first == null) {
+            return "[]";
+        }
+
+        String str = "";
+        Node current = first;
+        do {
+            str += "[" + current.item + "]";
+            current = current.next;
+            if (current != first) {
+                str += "<->";
+            }
+        } while (current != first);
+
+        return str;
+    }
+
     @Override
     public Iterator<Item> iterator() {
         return new LLIterator();
@@ -172,14 +178,32 @@ public class List<Item> implements Iterable<Item> {
 
         @Override
         public boolean hasNext() {
-            return current != null && current.next != first;
+            return current != null;
         }
 
         @Override
         public Item next() {
             Item item = current.item;
-            current = current.next;
+            current = (current == last) ? null : current.next;
             return item;
         }
     }
+
+    private class ReverseLLIterator implements Iterator<Item> {
+
+        private Node current = last;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public Item next() {
+            Item item = current.item;
+            current = (current == first) ? null : current.prev;
+            return item;
+        }
+    }
+
 }
