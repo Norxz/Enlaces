@@ -10,23 +10,23 @@ import java.util.Scanner;
  */
 public class Principal {
 
-    List<List> list;
-    
+    List<String> list;
+
     /**
      * Constructor del método lista
      */
-    public Principal(){
+    public Principal() {
         list = new List<>();
     }
-    
+
     /**
      * Genera los nombres que serán agregados a la lista
      *
      * @return
      */
     private String generarNombre() {
-        String[] nombres = {"Mohhamed", "Jorge","Ako","Santiago","Manuel","Aspi", "Andres", "Carolina", "Sebastián", "Felipe", "Camilo", "Miguel", "Ana", "Alberto", "Paola"};
-        String[] apellidos = {"Mclovin", "Borda","Cusguen", "Parra", "Mejia", "Viana","Ortiga", "Ramírez", "Riveros", "Sanabria", "Alvarez", "Pardo"};
+        String[] nombres = {"Mohhamed", "Jorge", "Ako", "Santiago", "Manuel", "Aspi", "Andres", "Carolina", "Sebastián", "Felipe", "Camilo", "Miguel", "Ana", "Alberto", "Paola"};
+        String[] apellidos = {"Mclovin", "Borda", "Cusguen", "Parra", "Mejia", "Viana", "Ortiga", "Ramírez", "Riveros", "Sanabria", "Alvarez", "Pardo"};
         return nombres[(int) (Math.random() * nombres.length)] + " " + apellidos[(int) (Math.random() * apellidos.length)];
     }
 
@@ -35,13 +35,17 @@ public class Principal {
      * @param args
      */
     public static void main(String[] args) {
-        int option;
-        List list;
+        int option, index;
+        Principal ppal;
+        String nombre;
         Scanner in = new Scanner(System.in);
+
+        ppal = new Principal();
 
         System.out.println("¡BIENVENIDO A LA LISTA!");
 
         while (true) {
+            option = 0;
             System.out.println("""
                                        Por favor, ingrese una opción:
                                        1. Insertar dato en una posición indicada.
@@ -58,12 +62,21 @@ public class Principal {
                                        12. Reemplazar el elemento en la posición especificada
                                        13. Retornar el numero de items.
                                        14. Retornar la porción indicada de items.
+                                       15. Enseñar los elementos de la lista.
                                        """);
             option = in.nextInt();
             switch (option) {
                 case 1:
+                    System.out.println("Ingrese la posición donde desea ingresar el elemento.");
+                    index = in.nextInt();
+                    nombre = ppal.generarNombre();
+                    System.out.println("Se adicióno el dato: " + nombre + "\n");
+                    ppal.list.add(nombre, index);
                     break;
                 case 2:
+                    nombre = ppal.generarNombre();
+                    ppal.list.add(nombre);
+                    System.out.println("El elemento " + nombre + " ha sido añadido.");
                     break;
                 case 3:
                     break;
@@ -88,6 +101,12 @@ public class Principal {
                 case 13:
                     break;
                 case 14:
+                    break;
+                case 15:
+                    System.out.println("Los elementos son: ");
+                    for (String s : ppal.list) {
+                        System.out.println(s);
+                    }
                     break;
                 default:
                     System.out.println("Error. Por favor ingresa una opción válida.");

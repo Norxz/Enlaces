@@ -30,6 +30,7 @@ public class List<Item> implements Iterable<Item> {
     public List() {
         first = null;
         last = null;
+        current = null;
         count = 0;
     }
 
@@ -41,15 +42,21 @@ public class List<Item> implements Iterable<Item> {
     public void add(Item element) {
         Node newElement = new Node();
         newElement.item = element;
-        newElement.prev = last;
-        last = newElement;
-        newElement.next = first;
+        if (count == 0) {
+            first = last = newElement;
+        } else {
+            last.next = newElement;
+            newElement.prev = last;
+            last = newElement;
+            last.next = first;
+            first.prev = last;
+        }
         count++;
     }
 
     /**
-     *Añade un item en la posicion indicada.
-     * 
+     * Añade un item en la posicion indicada.
+     *
      * @param element
      * @param index
      * @return
@@ -68,7 +75,9 @@ public class List<Item> implements Iterable<Item> {
                 current = current.next;
                 countAdd++;
             }
-            
+            if (true) {
+
+            }
             current.prev.next = newElement;
             current.next.prev = newElement;
             newElement.next = current.next;
@@ -85,7 +94,20 @@ public class List<Item> implements Iterable<Item> {
      * @param item El elemento a agregar.
      */
     public void push(Item item) {
-
+        Node oldfirst = first;
+        first = new Node();
+        first.item = item;
+        first.next = oldfirst;
+        if (oldfirst != null) {
+            oldfirst.prev = first;
+        }
+        if (last == null) {
+            last = first;
+        } else {
+            first.prev = last;
+            last.next = first;
+        }
+        count++;
     }
 
     /**
@@ -150,7 +172,7 @@ public class List<Item> implements Iterable<Item> {
 
         @Override
         public boolean hasNext() {
-            return current != null;
+            return current != null && current.next != first;
         }
 
         @Override
