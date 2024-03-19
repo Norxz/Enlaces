@@ -55,7 +55,7 @@ public class List<Item> implements Iterable<Item> {
      * @return
      */
     public boolean add(Item element, int index) {
-        if (index < count) {
+        if (index > count) {
             return false;
         } else {
             Node newElement = new Node();
