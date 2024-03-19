@@ -10,7 +10,8 @@ import java.util.Scanner;
  */
 public class Principal {
 
-    List<String> list;
+    List<List> list;
+    
     /**
      * Constructor del método lista
      */
@@ -24,8 +25,8 @@ public class Principal {
      * @return
      */
     private String generarNombre() {
-        String[] nombres = {"Juan", "Andres", "Carolina", "Sebastián", "Felipe", "Camilo", "Miguel", "Ana", "Alberto", "Paola"};
-        String[] apellidos = {"Parra", "Mejia", "Viana", "Ramírez", "Riveros", "Sanabria", "Alvarez", "Pardo"};
+        String[] nombres = {"Mohhamed", "Andres", "Carolina", "Sebastián", "Felipe", "Camilo", "Miguel", "Ana", "Alberto", "Paola"};
+        String[] apellidos = {"Mclovin","Parra", "Mejia", "Viana", "Ramírez", "Riveros", "Sanabria", "Alvarez", "Pardo"};
         return nombres[(int) (Math.random() * nombres.length)] + " " + apellidos[(int) (Math.random() * apellidos.length)];
     }
 
@@ -35,6 +36,7 @@ public class Principal {
      */
     public static void main(String[] args) {
         int option;
+        List list;
         Scanner in = new Scanner(System.in);
 
         System.out.println("¡BIENVENIDO A LA LISTA!");
@@ -74,7 +76,6 @@ public class Principal {
                 case 7:
                     break;
                 case 8:
-                    
                     break;
                 case 9:
                     break;
