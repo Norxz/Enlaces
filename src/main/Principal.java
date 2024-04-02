@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Iterator;
 import methods.List;
 
 import java.util.Scanner;
@@ -34,19 +35,10 @@ public class Principal {
                                        Por favor, ingrese una opción:
                                        1. Insertar dato en una posición indicada.
                                        2. Insertar dato al final de la lista
-                                       3. Añadir todos los items de una lista a otra.
-                                       4. Elimina todos los elementos de una lista.
-                                       5. Verifica si el elemento existe en la lista.
-                                       6. Retornar el elemento en la posicion especificada.
-                                       7. Retornar el índice de la primer ocurrencia.
-                                       8. Retornar verdadero si no contiene elementos.
-                                       9. Retornar el índice de la última ocurrencia.
-                                       10. Remover el elemento en la posicion especificada.
-                                       11. Remover la primer ocurrencia del elemento especificado.
-                                       12. Reemplazar el elemento en la posición especificada
-                                       13. Retornar el numero de items.
-                                       14. Retornar la porción indicada de items.
-                                       15. Enseñar los elementos de la lista.
+                                       3. Remover el elemento en la posicion especificada.
+                                       4. Enseñar los elementos de la lista.
+                                       5. Recorrer la lista en orden inverso.
+                                       6. Recorre la lista orden normal.
                                        """);
             option = in.nextInt();
             switch (option) {
@@ -63,20 +55,6 @@ public class Principal {
                     System.out.println("El elemento " + nombre + " ha sido añadido.");
                     break;
                 case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    break;
-                case 8:
-                    break;
-                case 9:
-                    break;
-                case 10:
                     System.out.println("Ingrese la posición del elemento que desea eliminar.");
                     index = in.nextInt();
                     try {
@@ -86,23 +64,27 @@ public class Principal {
                         System.out.println("Error: Índice fuera de los límites de la lista.");
                     }
                     break;
-                case 11:
-                    break;
-                case 12:
-                    break;
-                case 13:
-                    break;
-                case 14:
-                    break;
-                case 15:
+                case 4:
                     System.out.println("Los elementos son: ");
                     System.out.println(ppal.list.toString());
                     break;
+                case 5:
+                    System.out.println("Recorriendo la lista en orden inverso:");
+                    Iterator<String> reverseIterator = ppal.list.reverseIterator();
+                    while (reverseIterator.hasNext()) {
+                        System.out.println(reverseIterator.next());
+                    }
+                    break;
+                case 6:
+                    System.out.println("Recorriendo la lista en orden normal:");
+                    Iterator<String> iterator = ppal.list.iterator();
+                    while (iterator.hasNext()) {
+                        System.out.println(iterator.next());
+                    }
+                    break;
                 default:
                     System.out.println("Error. Por favor ingresa una opción válida.");
-
             }
         }
     }
-
 }

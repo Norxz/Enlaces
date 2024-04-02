@@ -172,6 +172,10 @@ public class List<Item> implements Iterable<Item> {
         return new LLIterator();
     }
 
+    public Iterator<Item> reverseIterator() {
+        return new ReverseLLIterator();
+    }
+
     private class LLIterator implements Iterator<Item> {
 
         private Node current = first;
