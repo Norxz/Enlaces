@@ -7,6 +7,9 @@ public class List<Item> implements Iterable<Item> {
     private Node first, last, current;
     private int count, countAdd;
 
+    /**
+     *  Crea los nodos y los item de tipo item
+     */
     private class Node {
 
         Item item;
@@ -14,6 +17,9 @@ public class List<Item> implements Iterable<Item> {
         Node prev;
     }
 
+    /**
+     *  Constructor de a lista
+     */
     public List() {
         first = null;
         last = null;
@@ -21,6 +27,11 @@ public class List<Item> implements Iterable<Item> {
         count = 0;
     }
 
+    /**
+     * Añade un elemento al final de la lista
+     * 
+     * @param element
+     */
     public void add(Item element) {
         Node newElement = new Node();
         newElement.item = element;
@@ -36,6 +47,13 @@ public class List<Item> implements Iterable<Item> {
         count++;
     }
 
+    /**
+     *  Añade un elemento a la posición indicada
+     * 
+     * @param element
+     * @param index
+     * @return
+     */
     public boolean add(Item element, int index) {
         if (index > count) {
             return false;
@@ -67,6 +85,11 @@ public class List<Item> implements Iterable<Item> {
         }
     }
 
+    /**
+     * Añade un elemento al inicio de la lista
+     * 
+     * @param item
+     */
     public void push(Item item) {
         Node oldfirst = first;
         first = new Node();
@@ -84,6 +107,11 @@ public class List<Item> implements Iterable<Item> {
         count++;
     }
 
+    /**
+     *  Elimina el primer elemento de la lista
+     * 
+     * @return
+     */
     public Item removeFirst() {
         Item item = first.item;
         first.item = null;
@@ -98,6 +126,11 @@ public class List<Item> implements Iterable<Item> {
         return item;
     }
 
+    /**
+     *  Elimina el último elemento de la lista.
+     * 
+     * @return
+     */
     public Item removeLast() {
         if (isEmpty()) {
             throw new NoSuchElementException("List is empty");
@@ -115,6 +148,12 @@ public class List<Item> implements Iterable<Item> {
         return item;
     }
 
+    /**
+     *  Elimina un elemento en la posición indicada.
+     * 
+     * @param index
+     * @return
+     */
     public Item remove(int index) {
         if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException("Index out of bounds");
@@ -136,18 +175,38 @@ public class List<Item> implements Iterable<Item> {
         return item;
     }
 
+    /**
+     *  Retorna el primer elemento de la lista.
+     * 
+     * @return
+     */
     public Item peek() {
         return first.item;
     }
 
+    /**
+     *  Verifica si la lista está vacía
+     * 
+     * @return
+     */
     public boolean isEmpty() {
         return first == null;
     }
 
+    /**
+     *  Retorna la cantidad de elementos en la lista
+     * 
+     * @return
+     */
     public int size() {
         return count;
     }
 
+    /**
+     *  Imprime los elementos pero bonitos
+     * 
+     * @return
+     */
     @Override
     public String toString() {
         if (first == null) {
@@ -167,11 +226,21 @@ public class List<Item> implements Iterable<Item> {
         return str;
     }
 
+    /**
+     *  Itera del primero al último 
+     * 
+     * @return
+     */
     @Override
     public Iterator<Item> iterator() {
         return new LLIterator();
     }
 
+    /**
+     *  Itera del último al primero
+     * 
+     * @return
+     */
     public Iterator<Item> reverseIterator() {
         return new ReverseLLIterator();
     }
@@ -180,11 +249,21 @@ public class List<Item> implements Iterable<Item> {
 
         private Node current = first;
 
+        /**
+         *  Verifica si tiene elementos al frente
+         * 
+         * @return
+         */
         @Override
         public boolean hasNext() {
             return current != null;
         }
 
+        /**
+         *  Avanza a través de la lista en orden
+         * 
+         * @return
+         */
         @Override
         public Item next() {
             Item item = current.item;
@@ -197,11 +276,21 @@ public class List<Item> implements Iterable<Item> {
 
         private Node current = last;
 
+        /**
+         *  Verifica si tiene elementos al frente
+         * 
+         * @return
+         */
         @Override
         public boolean hasNext() {
             return current != null;
         }
 
+        /**
+         *  Avanza a través de la lista en orden inverso
+         * 
+         * @return
+         */
         @Override
         public Item next() {
             Item item = current.item;

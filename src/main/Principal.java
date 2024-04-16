@@ -13,12 +13,22 @@ public class Principal {
         list = new List<>();
     }
 
+    /**
+     *  Generador de nombres al azar.
+     * 
+     * @return
+     */
     private String generarNombre() {
         String[] nombres = {"Mohhamed", "Jorge", "Ako", "Santiago", "Manuel", "Aspi", "Andres", "Carolina", "Sebastián", "Felipe", "Camilo", "Miguel", "Ana", "Alberto", "Paola"};
         String[] apellidos = {"Mclovin", "Borda", "Cusguen", "Parra", "Mejia", "Viana", "Ortiga", "Ramírez", "Riveros", "Sanabria", "Alvarez", "Pardo"};
         return nombres[(int) (Math.random() * nombres.length)] + " " + apellidos[(int) (Math.random() * apellidos.length)];
     }
 
+    /**
+     *  Main del código
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         int option, index;
         Principal ppal;
@@ -42,19 +52,19 @@ public class Principal {
                                        """);
             option = in.nextInt();
             switch (option) {
-                case 1:
+                case 1 -> {
                     System.out.println("Ingrese la posición donde desea ingresar el elemento.");
                     index = in.nextInt();
                     nombre = ppal.generarNombre();
                     System.out.println("Se adicióno el dato: " + nombre + "\n");
                     ppal.list.add(nombre, index);
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     nombre = ppal.generarNombre();
                     ppal.list.add(nombre);
                     System.out.println("El elemento " + nombre + " ha sido añadido.");
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     System.out.println("Ingrese la posición del elemento que desea eliminar.");
                     index = in.nextInt();
                     try {
@@ -63,26 +73,26 @@ public class Principal {
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Error: Índice fuera de los límites de la lista.");
                     }
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     System.out.println("Los elementos son: ");
                     System.out.println(ppal.list.toString());
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     System.out.println("Recorriendo la lista en orden inverso:");
                     Iterator<String> reverseIterator = ppal.list.reverseIterator();
                     while (reverseIterator.hasNext()) {
                         System.out.println(reverseIterator.next());
                     }
-                    break;
-                case 6:
+                }
+                case 6 -> {
                     System.out.println("Recorriendo la lista en orden normal:");
                     Iterator<String> iterator = ppal.list.iterator();
                     while (iterator.hasNext()) {
                         System.out.println(iterator.next());
                     }
-                    break;
-                default:
+                }
+                default ->
                     System.out.println("Error. Por favor ingresa una opción válida.");
             }
         }
